@@ -15,5 +15,5 @@ const defaultWheel = [
 
 //Load array to global variable so that it can be accessed by main JS
 addEventListener('load', () => {
- window.defaultWheel = defaultWheel
+  window.defaultWheel = defaultWheel
 })

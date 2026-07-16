@@ -1,106 +1,110 @@
 /* @import url(./Rodondo.otf); */
 @font-face {
- font-family: "Rodondo";
- src: url(Rodondo.otf) format("OpenType");
+    font-family: "Rodondo";
+    src: url(Rodondo.otf) format("OpenType");
 }
 
 :root {
- --scugColor: #ffffff;
- --wheel-left: 400px;
- --wheel-top: 200px;
+    --scugColor: #ffffff;
+    --wheel-left: 400px;
+    --wheel-top: 200px;
 }
 
-.textLight, .Survivor, .Spearmaster, .Artificer {
- color: #ffffff;
- border-color: #000000;
+.textLight,
+.Survivor,
+.Spearmaster,
+.Artificer {
+    color: #ffffff;
+    border-color: #000000;
 }
 
 .textDark {
- color: #000000;
- border-color: #000000;
+    color: #000000;
+    border-color: #000000;
 }
 
-#totalScreen{
- width: 100%;
- height: 100%;
+#totalScreen {
+    width: 100%;
+    height: 100%;
 }
 
 #wheel {
- margin-left: 300px;
- position: relative;
+    margin-left: 300px;
+    position: relative;
 }
 
-#wheel canvas, #canvas {
- position: absolute;
- left: var(--wheel-left);
- top: var(--wheel-top);
+#wheel canvas,
+#canvas {
+    position: absolute;
+    left: var(--wheel-left);
+    top: var(--wheel-top);
 }
 
 button {
- padding: 0px;
- height: 25px;
- width: 25px;
- display: inline;
- font-size: 16;
+    padding: 0px;
+    height: 25px;
+    width: 25px;
+    display: inline;
+    font-size: 16;
 }
 
 #menu {
- font-family: "Rodondo";
- font-size: 1.5em;
- float: left;
- background-color: transparent;
- text-align: center;
- width: 300px;
- display: flex;
- flex-direction: column;
- align-items: center;
+    font-family: "Rodondo";
+    font-size: 1.5em;
+    float: left;
+    background-color: transparent;
+    text-align: center;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #scugContainer {
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- align-items: center;
- height: 50px;
- width: 250px;
- overflow:hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 250px;
+    overflow: hidden;
 }
 
 input {
- vertical-align: bottom;
- position: relative;
- top: -2px;
- margin-right: 5px;
+    vertical-align: bottom;
+    position: relative;
+    top: -2px;
+    margin-right: 5px;
 }
 
 #toggleContainer {
- display: flex;
- align-items: center;
- background-color: #aaaaaa;
- border-style: solid;
- border-radius: 5px;
- padding: 3px;
- margin: 5px;
+    display: flex;
+    align-items: center;
+    background-color: #aaaaaa;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 5px;
 }
 
 #scug {
- border-style: solid;
- line-height: 90%;
- padding: 3px;
- border-radius: 5px;
- margin: 5px;
- width: 50%;
- height: 50%;
+    border-style: solid;
+    line-height: 90%;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 5px;
+    width: 50%;
+    height: 50%;
 }
 
 #pointer {
- display: none;
- position: relative;
- left: 765px;
- top: 354px;
- height: 91.5px;
- width: auto;
- z-index: 40;
+    display: none;
+    position: relative;
+    left: 765px;
+    top: 354px;
+    height: 91.5px;
+    width: auto;
+    z-index: 40;
 }
 
 #pointer-animation {
@@ -113,95 +117,95 @@ input {
 }
 
 #result {
- display: none;
- position: relative;
- left: 547px;
- top: 397px;
- flex-direction: column; 
- justify-content: space-between;
- align-items: center;
- text-align: center;
- font-family: "Rodondo";
- font-weight: 500;
- font-size: 36px;
- background: radial-gradient(color-mix(in oklab, var(--scugColor) 50%, #ffffff 50%), var(--scugColor), color-mix(in oklab, var(--scugColor) 98%, #000000 2%));
- height: 400px;
- width: 500px;
- z-index: 50;
- border: 3px #000000 solid;
- border-radius: 20px;
+    display: none;
+    position: relative;
+    left: 547px;
+    top: 397px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    font-family: "Rodondo";
+    font-weight: 500;
+    font-size: 36px;
+    background: radial-gradient(color-mix(in oklab, var(--scugColor) 50%, #ffffff 50%), var(--scugColor), color-mix(in oklab, var(--scugColor) 98%, #000000 2%));
+    height: 400px;
+    width: 500px;
+    z-index: 50;
+    border: 3px #000000 solid;
+    border-radius: 20px;
 }
 
 #scugResult {
- padding-bottom: 25px;
- width: auto;
- height: 200px;
+    padding-bottom: 25px;
+    width: auto;
+    height: 200px;
 }
 
-#overlay{
- display: none;
- position: fixed;
- width:100%;
- height:100%;
- top:0;
- left:0;
- background-color: #000000;
- opacity:0.6;
- z-index: 5;
+#overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0.6;
+    z-index: 5;
 }
 
 .minus {
- float: left;
+    float: left;
 }
 
 .plus {
- float: right;
+    float: right;
 }
 
 .other {
- width: 100px;
+    width: 100px;
 }
 
 .Spearmaster {
- background-color: #61267a;
+    background-color: #61267a;
 }
 
 .Artificer {
- background-color: #761000;
+    background-color: #761000;
 }
 
 .Hunter {
- background-color: #cd6d9b;
+    background-color: #cd6d9b;
 }
 
 .Gourmand {
- background-color: #ffd7ab;
+    background-color: #ffd7ab;
 }
 
 .Survivor {
- background-color: #000000;
+    background-color: #000000;
 }
 
 .Monk {
- background-color: #ffe669;
+    background-color: #ffe669;
 }
 
 .Rivulet {
- background-color: #92c5d5;
+    background-color: #92c5d5;
 }
 
 .Saint {
- background-color: #69bf5a;
+    background-color: #69bf5a;
 }
 
 .Watcher {
- background-color: #8F94C1;
+    background-color: #8F94C1;
 }
 
 .Slugpup {
- background-color: #91637E;
+    background-color: #91637E;
 }
 
 .Inv {
- background-color: #B1FDFA;
+    background-color: #B1FDFA;
 }

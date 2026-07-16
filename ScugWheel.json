@@ -1,12 +1,12 @@
 {
- "defaultSegments": [
-   "Spearmaster",
-   "Artificer",
-   "Hunter",
-   "Gourmand",
-   "Survivor",
-   "Monk",
-   "Rivulet",
-   "Saint"
- ]
+  "defaultSegments": [
+    "Spearmaster",
+    "Artificer",
+    "Hunter",
+    "Gourmand",
+    "Survivor",
+    "Monk",
+    "Rivulet",
+    "Saint"
+  ]
 }
