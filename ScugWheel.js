@@ -73,26 +73,22 @@ const Slugcats = [
  Inv
 ]
 
+CustomEase.create("customBack", "M0,0 C0.023,0 0.033,-0.03 0.058,-0.03 0.087,-0.03 0.138,0.516 0.301,0.724 0.399,0.85 0.478,0.932 0.622,0.967 0.712,0.989 0.886,0.999 1,1 ");
+
 const IdleAnimation = {
-  'type' : 'spinOngoing',
-  'spins' : 1,
-  'duration' : 20,
+  'type' : 'custom',
+  'duration' : 10,
+  'easing' : 'linear',
   'rotationAngle' : 0,
   'propertyName' : 'rotationAngle',
-  'propertyValue' : 0,
-  'callbackAfter' : drawBgWheel,
-  'soundTrigger' : 'segment',
-  'callbackSound' : spinSound,
+  'propertyValue' : 360,
   'repeat' : -1
 }
 const RollAnimation = {
   'type' : "spinToStop",
-  'spins' : 10,
-  'duration' : 10,
-  'easing' : 'Power3.easeInOut',
-  'callbackAfter' : drawBgWheel,
-  'callbackSound' : spinSound,
-  'soundTrigger' : 'segment',
+  'spins' : 15,
+  'duration' : 15,
+  'easing' : 'customBack',
   'callbackFinished' : scugSelection,
   'stopAngle' : null,
   'repeat' : 0
@@ -103,23 +99,15 @@ let enforceSpacing = false;
 if (enforceSpacing)
   spaceListElements(wheelData)
 
-let bgWheel = new Winwheel({
- 'canvasId':'bg',
- 'numSegments':wheelData.length,
- 'lineWidth':3,
- 'innerRadius':200,
- 'segments' : getBgSegments(wheelData)
-});
-
 let theWheel = new Winwheel({
  'canvasId':'canvas',
  'numSegments':wheelData.length,
- 'innerRadius':200,
  'textAlignment':'inner',
  'textMargin': 100,
- 'lineWidth':3,
+ 'lineWidth': 0,
  'pointerAngle': 90,
- 'drawMode' : 'segmentImage',
+ 'drawMode' : 'image',
+ 'wheelImage' : "Scugs\\wheel.png",
  'segments' : getScugSegments(wheelData),
  'animation' : IdleAnimation
 });
@@ -127,15 +115,22 @@ let theWheel = new Winwheel({
 let audioResult1 = new Audio('.\\Sfx\\Karma_KarmaPitchDiscovery.wav');
 let audioResult2 = new Audio('.\\Sfx\\Karma_capBell1.wav');
 let audioResult3 = new Audio('.\\Sfx\\Karma_GhostPingBase.wav');
+audioResult1.volume = 0.2;
+audioResult2.volume = 0.2;
+audioResult3.volume = 0.2;
 let audioSpinQueue = [];
-let audioSpinState = 0
+let audioSpinState = 0;
+let loadedImg = new Image();
 
+loadedImg.onload = function()
+{
+    theWheel.wheelImage = loadedImg;    // Make wheelImage equal the loaded image object.
+    theWheel.draw();                    // Also call draw function to render the wheel.
+}
+loadedImg.src = "wheel.png";
 
 addEventListener("load", () => {
-
- resizeImageSegments(theWheel);
  theWheel.startAnimation();
-
 })
 
 
@@ -246,11 +241,21 @@ function resultSound(sound)
 
 function spinWheel()
 {
+  theWheel.stopAnimation();
   clicked = true;
   theWheel.animation = RollAnimation;
   wheelSpinning = true;
   theWheel.startAnimation();
   document.getElementById("wheel").removeAttribute("onclick");
+  const pointerAnimation = Animations[1 + Math.floor(Math.random() * (Animations.length - 1))];
+  const pointerImg = document.createElement("img");
+  pointerImg.id = "pointer-animation";
+  pointerImg.src = pointerAnimation.animation + "?a=" + Math.random();
+  theWheel.pointerAngle = pointerAnimation.pinAngle;
+  setTimeout(() => {
+    document.getElementById("canvas").after(pointerImg);
+    pointerAnimation.audio.play();
+  }, RollAnimation.duration * 1000 - pointerAnimation.timeToPin);
 }
 
 function scugSelection()
@@ -260,17 +265,9 @@ function scugSelection()
   theWheel.startAnimation();
   theWheel.draw(true)
   } else {
-   if (Math.round(Math.floor(Math.random()*10)+1) > 2) {
-    resultSound(1);
-   } else {
-    theWheel.rotationAngle = selectionAdjust(theWheel.rotationAngle)
-    bgWheel.rotationAngle = theWheel.rotationAngle
-
-    theWheel.draw(true)
-    bgWheel.draw(true)
-   }
-
+  resultSound(1);
   wheelSpinning = false;
+  theWheel.stopAnimation(false);
   let chosenScug = (theWheel.getIndicatedSegment()).image.split('\\').pop().slice(0,-4);
   let scugData = getScugData(chosenScug)
   console.log(scugData)
@@ -291,9 +288,10 @@ function scugSelection()
 
   document.getElementById("resultText").innerHTML = "Selected Character is <br/>" + chosenScug
   
-  document.getElementById("pointer").style.top = "-52px"
-  document.getElementById("overlay").style.display = "block";
+  document.getElementById("pointer").style.top = "-52px";
+  //document.getElementById("overlay").style.display = "block";
   document.getElementById("result").style.display = "flex";
+  theWheel.stopAnimation(false);
  }
 }
 
@@ -320,18 +318,16 @@ function closeResult() {
 
 function resetSpin()
 {
+  if (document.getElementById("pointer-animation"))
+    document.getElementById("pointer-animation").remove();
   theWheel.stopAnimation(false);
-  theWheel.rotationAngle = 0;
+  theWheel.rotationAngle %= 360;
+  IdleAnimation.rotationAngle = theWheel.rotationAngle;
+  IdleAnimation.propertyValue = theWheel.rotationAngle +360;
   theWheel.animation = IdleAnimation;
-
   theWheel.startAnimation();
   document.getElementById("wheel").setAttribute('onclick', "spinWheel()");
   clicked = false;
-}
-
-function drawBgWheel () {
- bgWheel.rotationAngle = theWheel.rotationAngle;
- bgWheel.draw(false);
 }
 
 function resizeImageSegments(wheel) {
@@ -394,7 +390,6 @@ function getMaxWidth(num){
     wheelData.splice(scugSearch, 1)
     // apparently wheels have a phantom segment, so indexing starts at 1. Go figure.
     theWheel.deleteSegment(scugSearch + 1)
-    bgWheel.deleteSegment(scugSearch + 1)
     if (enforceSpacing)
       spaceWheelSegments()
     resizeImageSegments(theWheel)
@@ -405,14 +400,11 @@ function getMaxWidth(num){
   wheelData.push(scugName)
   let scugData = getScugData(scugName)
   let newWheelSegment = theWheel.addSegment()
-  let bgWheelSegment = bgWheel.addSegment()
 
   newWheelSegment.image = scugData.image
   newWheelSegment.imgData = new Image();
   newWheelSegment.imgData.onload = winwheelLoadedImage;
   newWheelSegment.imgData.src = newWheelSegment.image
-
-  bgWheelSegment.fillStyle = scugData.fillColor
 
   if (enforceSpacing)
     spaceWheelSegments()
@@ -426,23 +418,19 @@ function getMaxWidth(num){
   for (i = theWheel.numSegments - 1; i >= 1; i--)
   {
     theWheel.deleteSegment(i)
-    bgWheel.deleteSegment(i)
   }
   for (i = 0; i < wheelData.length; i++)
   {
     let scugData = getScugData(wheelData[i])
     let newWheelSegment = theWheel.addSegment()
-    let bgWheelSegment = bgWheel.addSegment()
 
     newWheelSegment.image = scugData.image
     newWheelSegment.imgData = new Image();
     newWheelSegment.imgData.onload = winwheelLoadedImage;
     newWheelSegment.imgData.src = newWheelSegment.image
 
-    bgWheelSegment.fillStyle = scugData.fillColor
   }
     theWheel.deleteSegment(1)
-    bgWheel.deleteSegment(1)
  }
 
 // returns either 'light' or 'dark'

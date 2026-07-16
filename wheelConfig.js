@@ -10,9 +10,7 @@ const defaultWheel = [
   "Monk",
   "Rivulet",
   "Saint",
-  "Watcher",
-  "Slugpup",
-  "Inv"
+  "Watcher"
 ]
 
 //Load array to global variable so that it can be accessed by main JS
