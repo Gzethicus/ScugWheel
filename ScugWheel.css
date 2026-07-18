@@ -36,8 +36,8 @@
 #wheel canvas,
 #canvas {
     position: absolute;
-    left: var(--wheel-left);
-    top: var(--wheel-top);
+    left: calc(var(--wheel-left) - 100px);
+    top: calc(var(--wheel-top) - 100px);
 }
 
 button {

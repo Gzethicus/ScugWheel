@@ -3,7 +3,7 @@
 DrekiOrmur  
 Gzethicus
 ### Wheel sprite
-Speoyt (coming soon)
+Speoyt
 ### Pin animations
 Gzethicus
 GreatGameDota
