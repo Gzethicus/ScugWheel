@@ -8,6 +8,7 @@ Speoyt
 Gzethicus
 GreatGameDota
 ShrubFromTomorrow
+Syrilth
 ### Lediting (wheel arena)
 CozyGifts
 ### In-game recording settings

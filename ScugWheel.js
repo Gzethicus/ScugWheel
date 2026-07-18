@@ -236,6 +236,7 @@ function spinWheel() {
   theWheel.startAnimation();
   document.getElementById("wheel").removeAttribute("onclick");
   const pointerAnimation = Animations[1 + Math.floor(Math.random() * (Animations.length - 1))];
+  //const pointerAnimation = Animations[9];
   const pointerImg = document.createElement("img");
   pointerImg.id = "pointer-animation";
   pointerImg.src = pointerAnimation.animation + "?a=" + Math.random();

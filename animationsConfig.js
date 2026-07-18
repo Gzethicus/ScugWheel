@@ -8,5 +8,5 @@ const Animations = [
     { animation: "animations\\gourmand.gif", audio: new Audio("animations\\gourmand.flac"), timeToPin: 3600, pinAngle: 93.33 },
     { animation: "animations\\handstand.gif", audio: new Audio("animations\\handstand.flac"), timeToPin: 6200, pinAngle: 93.33 },
     { animation: "animations\\wigglefly.gif", audio: new Audio("animations\\wigglefly.flac"), timeToPin: 7200, pinAngle: 93.33 },
-    //{animation: "animations\\blueLiz.gif", audio: new Audio("animations\\blueLiz.flac"), timeToPin: 15000, pinAngle: 93.33},
+    { animation: "animations\\blueLiz.gif", audio: new Audio("animations\\blueLiz.flac"), timeToPin: 13850, pinAngle: 93.33 },
 ]
