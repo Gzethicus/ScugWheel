@@ -78,6 +78,7 @@ const IdleAnimation = {
   'type': 'custom',
   'duration': 10,
   'easing': 'linear',
+  'callbackAfter' : drawOverWheel,
   'rotationAngle': 0,
   'propertyName': 'rotationAngle',
   'propertyValue': 360,
@@ -88,6 +89,7 @@ const RollAnimation = {
   'spins': 15,
   'duration': 15,
   'easing': 'customBack',
+  'callbackAfter' : drawOverWheel,
   'callbackFinished': scugSelection,
   'stopAngle': null,
   'repeat': 0
@@ -111,6 +113,12 @@ let theWheel = new Winwheel({
   'animation': IdleAnimation
 });
 
+let overWheel = new Winwheel({
+  'canvasId':'over',
+  'drawMode': 'image',
+  'wheelImage': "Scugs\\wheel_over.png",
+});
+
 let audioResult1 = new Audio('.\\Sfx\\Karma_KarmaPitchDiscovery.wav');
 let audioResult2 = new Audio('.\\Sfx\\Karma_capBell1.wav');
 let audioResult3 = new Audio('.\\Sfx\\Karma_GhostPingBase.wav');
@@ -119,13 +127,20 @@ audioResult2.volume = 0.2;
 audioResult3.volume = 0.2;
 let audioSpinQueue = [];
 let audioSpinState = 0;
-let loadedImg = new Image();
 
+let loadedImg = new Image();
 loadedImg.onload = function () {
   theWheel.wheelImage = loadedImg;    // Make wheelImage equal the loaded image object.
   theWheel.draw();                    // Also call draw function to render the wheel.
 }
 loadedImg.src = "wheel.png";
+
+let loadedImgOver = new Image();
+loadedImgOver.onload = function () {
+  overWheel.wheelImage = loadedImgOver;    // Make wheelImage equal the loaded image object.
+  overWheel.draw();                    // Also call draw function to render the wheel.
+}
+loadedImgOver.src = "wheel_over.png";
 
 addEventListener("load", () => {
   theWheel.startAnimation();
@@ -312,6 +327,14 @@ function resetSpin() {
   theWheel.startAnimation();
   document.getElementById("wheel").setAttribute('onclick', "spinWheel()");
   clicked = false;
+}
+
+function drawOverWheel () {
+  overWheel.rotationAngle = theWheel.rotationAngle;
+  let canvas = document.getElementById("over").getContext("2d");
+  canvas.clearRect(0, 0, 1000, 1000);
+  canvas.beginPath();
+  overWheel.draw(false);
 }
 
 function resizeImageSegments(wheel) {
