@@ -8,7 +8,9 @@ const Animations = [
     { animation: "animations\\gourmand.gif", audio: new Audio("animations\\gourmand.flac"), timeToPin: 3600, pinPos: "down" },
     { animation: "animations\\handstand.gif", audio: new Audio("animations\\handstand.flac"), timeToPin: 6200, pinPos: "down" },
     { animation: "animations\\wigglefly.gif", audio: new Audio("animations\\wigglefly.flac"), timeToPin: 7200, pinPos: "down" },
-    { animation: "animations\\blueLiz.gif", audio: new Audio("animations\\blueLiz.flac"), timeToPin: 13850, pinPos: "down" },
+    { animation: "animations\\rotLiz.gif", audio: new Audio("animations\\rotLiz.flac"), timeToPin: 5550, pinPos: "down" },
+    { animation: "animations\\spearmaster.gif", audio: new Audio("animations\\spearmaster.flac"), timeToPin: 5000, pinPos: "down" },
+    { animation: "animations\\rivulet.gif", audio: new Audio("animations\\rivulet.flac"), timeToPin: 2100, pinPos: "down" },
 ]
 
 const PinInfos = {
