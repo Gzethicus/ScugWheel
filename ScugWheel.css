@@ -33,6 +33,14 @@
     position: relative;
 }
 
+#over.down {
+    clip-path: polygon(0 0, 100% 0, 100% 51.64%, 85% 51.64%, 85% 52.42%, 100% 52.42%, 100% 100%, 0 100%);
+}
+
+#over.up {
+    clip-path: polygon(0 0, 100% 0, 100% 46.24%, 85% 46.24%, 85% 47.02%, 100% 47.02%, 100% 100%, 0 100%);
+}
+
 #wheel canvas,
 #canvas {
     position: absolute;

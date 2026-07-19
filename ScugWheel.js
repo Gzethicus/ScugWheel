@@ -252,10 +252,11 @@ function spinWheel() {
   document.getElementById("wheel").removeAttribute("onclick");
   const pointerAnimation = Animations[1 + Math.floor(Math.random() * (Animations.length - 1))];
   //const pointerAnimation = Animations[9];
+  document.getElementById("over").setAttribute("class", pointerAnimation.pinPos);
   const pointerImg = document.createElement("img");
   pointerImg.id = "pointer-animation";
   pointerImg.src = pointerAnimation.animation + "?a=" + Math.random();
-  theWheel.pointerAngle = pointerAnimation.pinAngle;
+  theWheel.pointerAngle = PinInfos[pointerAnimation.pinPos].angle;
   setTimeout(() => {
     document.getElementById("canvas").after(pointerImg);
     pointerAnimation.audio.play();
@@ -333,7 +334,6 @@ function drawOverWheel () {
   overWheel.rotationAngle = theWheel.rotationAngle;
   let canvas = document.getElementById("over").getContext("2d");
   canvas.clearRect(0, 0, 1000, 1000);
-  canvas.beginPath();
   overWheel.draw(false);
 }
 
