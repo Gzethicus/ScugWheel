@@ -13,3 +13,4 @@ Syrilth
 CozyGifts
 ### In-game recording settings
 Mantis
+BluSalient
