@@ -11,6 +11,7 @@ const Animations = [
     { animation: "animations\\rotLiz.gif", audio: new Audio("animations\\rotLiz.flac"), timeToPin: 5550, pinPos: "down" },
     { animation: "animations\\spearmaster.gif", audio: new Audio("animations\\spearmaster.flac"), timeToPin: 5000, pinPos: "down" },
     { animation: "animations\\rivulet.gif", audio: new Audio("animations\\rivulet.flac"), timeToPin: 2100, pinPos: "down" },
+    { animation: "animations\\ploink.gif", audio: new Audio("animations\\ploink.flac"), timeToPin: 1650, pinPos: "up" },
 ]
 
 const PinInfos = {

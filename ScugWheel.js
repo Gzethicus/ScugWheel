@@ -144,6 +144,7 @@ loadedImgOver.src = "wheel_over.png";
 
 addEventListener("load", () => {
   theWheel.startAnimation();
+  document.getElementById("result").addEventListener("animationend", closeResult);
 })
 
 
@@ -251,7 +252,7 @@ function spinWheel() {
   theWheel.startAnimation();
   document.getElementById("wheel").removeAttribute("onclick");
   const pointerAnimation = Animations[1 + Math.floor(Math.random() * (Animations.length - 1))];
-  //const pointerAnimation = Animations[11];
+  //const pointerAnimation = Animations[12];
   document.getElementById("over").setAttribute("class", pointerAnimation.pinPos);
   const pointerImg = document.createElement("img");
   pointerImg.id = "pointer-animation";

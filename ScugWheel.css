@@ -4,6 +4,17 @@
     src: url(Rodondo.otf) format("OpenType");
 }
 
+@keyframes fade {
+    0%, 100% {
+        opacity: 0;
+        scale: 0.5;
+    }
+    2.5%, 80% {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
 :root {
     --scugColor: #ffffff;
     --wheel-left: 400px;
@@ -172,6 +183,12 @@ input {
 
 .other {
     width: 100px;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
 }
 
 .Spearmaster {
